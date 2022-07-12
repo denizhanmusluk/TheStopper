@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: afe661eb97cc14806bcd9707bf66b4df
+labels:
+- bulldozer
+- car
+- construction
+- excavator
+- industrial
+- vehicle
+timeCreated: 1522275899
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

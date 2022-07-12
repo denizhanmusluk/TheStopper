@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6b9a9662ab3a04bbdb92d03dfae36f2a
+labels:
+- accesory
+- addon
+- emergency
+- exit
+- fire
+- safety
+- stairs
+timeCreated: 1522275338
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

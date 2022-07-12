@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 811bf1cacd95e4cfd82e62203f5f7e1b
+labels:
+- cart
+- cistern
+- industrial
+- train
+timeCreated: 1522432876
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

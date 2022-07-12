@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9893806fe7178431f8fe06c897499af7
+labels:
+- electric
+- pole
+- stoplight
+- streetlight
+timeCreated: 1522432257
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

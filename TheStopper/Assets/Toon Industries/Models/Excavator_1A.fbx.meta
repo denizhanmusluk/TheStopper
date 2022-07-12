@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 10e9b139a8a114a6cbcbf89db1224a9c
+timeCreated: 1511569593
+licenseType: Store
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Blade_13B.001
+    100002: Blade_Pivot_13B.001
+    100004: Excavator_1A
+    100006: //RootNode
+    100008: Pistons_13B.001
+    100010: Wheel_12B_R.L.001
+    100012: Wheel_12B_R.R.001
+    100014: Wheel_13A_R.L.001
+    100016: Wheel_13A_R.R.001
+    100018: Light_Yellow.001
+    100020: Excavator_1A_Body
+    100022: Excavator_1A_Wheel_F.L
+    100024: Excavator_1A_Wheel_F.R
+    100026: Excavator_1A_Wheel_R.L
+    100028: Excavator_1A_Wheel_R.R
+    100030: Excavator_Blade_1A
+    100032: Excavator_Blade_Pistons_1A
+    100034: Excavator_Blade_Pivot_1A
+    400000: Blade_13B.001
+    400002: Blade_Pivot_13B.001
+    400004: //RootNode
+    400006: Excavator_1A
+    400008: Pistons_13B.001
+    400010: Wheel_12B_R.L.001
+    400012: Wheel_12B_R.R.001
+    400014: Wheel_13A_R.L.001
+    400016: Wheel_13A_R.R.001
+    400018: Light_Yellow.001
+    400020: Excavator_1A_Body
+    400022: Excavator_1A_Wheel_F.L
+    400024: Excavator_1A_Wheel_F.R
+    400026: Excavator_1A_Wheel_R.L
+    400028: Excavator_1A_Wheel_R.R
+    400030: Excavator_Blade_1A
+    400032: Excavator_Blade_Pistons_1A
+    400034: Excavator_Blade_Pivot_1A
+    2300000: Blade_13B.001
+    2300002: Blade_Pivot_13B.001
+    2300004: Excavator_1A
+    2300006: Pistons_13B.001
+    2300008: Wheel_12B_R.L.001
+    2300010: Wheel_12B_R.R.001
+    2300012: Wheel_13A_R.L.001
+    2300014: Wheel_13A_R.R.001
+    2300016: Light_Yellow.001
+    2300018: Excavator_1A_Body
+    2300020: Excavator_1A_Wheel_F.L
+    2300022: Excavator_1A_Wheel_F.R
+    2300024: Excavator_1A_Wheel_R.L
+    2300026: Excavator_1A_Wheel_R.R
+    2300028: Excavator_Blade_1A
+    2300030: Excavator_Blade_Pistons_1A
+    2300032: Excavator_Blade_Pivot_1A
+    3300000: Blade_13B.001
+    3300002: Blade_Pivot_13B.001
+    3300004: Excavator_1A
+    3300006: Pistons_13B.001
+    3300008: Wheel_12B_R.L.001
+    3300010: Wheel_12B_R.R.001
+    3300012: Wheel_13A_R.L.001
+    3300014: Wheel_13A_R.R.001
+    3300016: Light_Yellow.001
+    3300018: Excavator_1A_Body
+    3300020: Excavator_1A_Wheel_F.L
+    3300022: Excavator_1A_Wheel_F.R
+    3300024: Excavator_1A_Wheel_R.L
+    3300026: Excavator_1A_Wheel_R.R
+    3300028: Excavator_Blade_1A
+    3300030: Excavator_Blade_Pistons_1A
+    3300032: Excavator_Blade_Pivot_1A
+    4300000: Excavator_1A
+    4300002: Wheel_13A_R.L.001
+    4300004: Wheel_13A_R.R.001
+    4300006: Wheel_12B_R.R.001
+    4300008: Wheel_12B_R.L.001
+    4300010: Blade_Pivot_13B.001
+    4300012: Pistons_13B.001
+    4300014: Blade_13B.001
+    4300016: Light_Yellow.001
+    4300018: Excavator_1A_Body
+    4300020: Excavator_1A_Wheel_F.R
+    4300022: Excavator_1A_Wheel_F.L
+    4300024: Excavator_1A_Wheel_R.L
+    4300026: Excavator_1A_Wheel_R.R
+    4300028: Excavator_Blade_Pivot_1A
+    4300030: Excavator_Blade_Pistons_1A
+    4300032: Excavator_Blade_1A
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

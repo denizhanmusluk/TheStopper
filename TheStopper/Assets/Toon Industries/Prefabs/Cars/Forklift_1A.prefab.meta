@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d540187b2e00b4b398c74c305a5c7ce2
+labels:
+- car
+- cargo
+- construction
+- forklift
+- industrial
+- transport
+- vehicle
+timeCreated: 1522276207
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

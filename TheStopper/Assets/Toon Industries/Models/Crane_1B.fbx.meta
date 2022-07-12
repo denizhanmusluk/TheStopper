@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: b6646dcd3136a460f812263dda00b548
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Cable_Connector
+    100002: //RootNode
+    100004: Crane_1B
+    100006: Crane_1B_Wheel_F.L
+    100008: Crane_1B_Wheel_F.R
+    100010: Crane_1B_Wheel_M.L
+    100012: Crane_1B_Wheel_M.R
+    100014: Crane_1B_Wheel_R.L
+    100016: Crane_1B_Wheel_R.R
+    100018: Crane_Rig_1B
+    100020: Hook
+    100022: Hook_end
+    100024: Root
+    100026: Swing_Arm
+    400000: Cable_Connector
+    400002: //RootNode
+    400004: Crane_1B
+    400006: Crane_1B_Wheel_F.L
+    400008: Crane_1B_Wheel_F.R
+    400010: Crane_1B_Wheel_M.L
+    400012: Crane_1B_Wheel_M.R
+    400014: Crane_1B_Wheel_R.L
+    400016: Crane_1B_Wheel_R.R
+    400018: Crane_Rig_1B
+    400020: Hook
+    400022: Hook_end
+    400024: Root
+    400026: Swing_Arm
+    2300000: Crane_1B_Wheel_F.L
+    2300002: Crane_1B_Wheel_F.R
+    2300004: Crane_1B_Wheel_M.L
+    2300006: Crane_1B_Wheel_M.R
+    2300008: Crane_1B_Wheel_R.L
+    2300010: Crane_1B_Wheel_R.R
+    3300000: Crane_1B_Wheel_F.L
+    3300002: Crane_1B_Wheel_F.R
+    3300004: Crane_1B_Wheel_M.L
+    3300006: Crane_1B_Wheel_M.R
+    3300008: Crane_1B_Wheel_R.L
+    3300010: Crane_1B_Wheel_R.R
+    4300000: Crane_1B_Wheel_M.R
+    4300002: Crane_1B_Wheel_F.R
+    4300004: Crane_1B_Wheel_R.R
+    4300006: Crane_1B_Wheel_F.L
+    4300008: Crane_1B_Wheel_R.L
+    4300010: Crane_1B_Wheel_M.L
+    4300012: Crane_1B
+    9500000: //RootNode
+    13700000: Crane_1B
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crane_1A_D
+    second: {fileID: 2100000, guid: b6b9590aaf34042d79db6f010a7d9a3e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.9999999
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

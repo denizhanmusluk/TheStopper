@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 772aae025390a409f9cfaa0b486ff761
+labels:
+- car
+- cargo
+- transport
+- van
+- vehicle
+timeCreated: 1522433841
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
