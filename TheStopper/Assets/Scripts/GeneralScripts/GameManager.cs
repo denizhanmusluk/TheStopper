@@ -169,17 +169,18 @@ public class GameManager : MonoBehaviour, IWinObserver, ILoseObserver
 
 
         PlayerPrefs.SetInt("level", Globals.currentLevelIndex);
-        //StartCoroutine(levelLoad());
+        StartCoroutine(levelLoad());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        Destroy(lvlManager.loadedLevel);
+        //Destroy(lvlManager.loadedLevel);
 
-        lvlManager.levelLoad();
+        //lvlManager.levelLoad();
 
 
 
         //Start();
 
-        Notify_GameStartObservers();
+        //Notify_GameStartObservers();
 
 
         //Start();
