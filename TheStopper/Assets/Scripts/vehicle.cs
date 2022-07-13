@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 public class vehicle : MonoBehaviour
 {
+    [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     public enum States { follow, push ,win,fail}
     public States currentState;
     [SerializeField] Transform followingPoint, targetPlayer;
@@ -13,6 +14,7 @@ public class vehicle : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI vehiclelevelText;
     [SerializeField] int vehiclePower;
+    [SerializeField] float blendPower;
      int vehicleFirstHitPower;
     Animator anim;
     [SerializeField] float pushSpeed;
@@ -20,6 +22,7 @@ public class vehicle : MonoBehaviour
     [SerializeField] GameObject crashParticle;
     void Start()
     {
+        _skinnedMeshRenderer.SetBlendShapeWeight(0, 0);
         if (GetComponent<Animator>() != null)
         {
             anim = GetComponent<Animator>();
@@ -71,7 +74,7 @@ public class vehicle : MonoBehaviour
     }
     void moveToTarget()
     {
-        if (Vector3.Distance(transform.position,targetPlayer.position) < 0.1f && !hitting)
+        if (Vector3.Distance(transform.position,targetPlayer.GetChild(1).position) < 0.1f && !hitting)
         {
             Debug.Log("hit");
             hitting = true;
@@ -80,7 +83,7 @@ public class vehicle : MonoBehaviour
             StartCoroutine(pushPlayer());
             StartCoroutine(pushMoveSpeed());
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, 75 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.GetChild(1).position, 120 * Time.deltaTime);
 
     }
     void runOver()
@@ -96,9 +99,9 @@ public class vehicle : MonoBehaviour
         transform.position += new Vector3(0, -5, 0);
         while(counter < Mathf.PI)
         {
-            transform.position = new Vector3(transform.position.x, -4, targetPlayer.position.z - 2);
+            transform.position = new Vector3(transform.position.x, -4, targetPlayer.GetChild(1).position.z - 2);
             counter += 5 * Time.deltaTime;
-            angle = 20 * Mathf.Sin(counter);
+            angle = 10 * Mathf.Sin(counter);
             transform.rotation = Quaternion.Euler(angle, 0, 0);
             yield return null;
         }
@@ -151,6 +154,11 @@ public class vehicle : MonoBehaviour
                 break;
 
             }
+            if (vehiclePower <= blendPower)
+            {
+                _skinnedMeshRenderer.SetBlendShapeWeight(0, 100f * (1f - (vehiclePower / blendPower)));
+            }
+
             power.Instance.powerUpdate(-1);
 
             StartCoroutine(Scaling(vehiclelevelText.transform));

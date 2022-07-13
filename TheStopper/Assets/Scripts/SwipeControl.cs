@@ -27,6 +27,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     [SerializeField] CinemachineVirtualCamera failCam;
     public vehicle _vehicle;
     bool swipeActive = true;
+    int pushAnimSelect = 0;
     private void Start()
     {
         GameManager.Instance.Add_LoseObserver(this);
@@ -45,7 +46,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     {
         GameManager.Instance.Remove_LoseObserver(this);
         failCam.Priority = 10;
-        failCam.LookAt = transform.GetChild(1).GetChild(0).transform;
+        failCam.LookAt = transform.GetChild(2).GetChild(0).transform;
 
     }
     public void WinScenario()
@@ -57,10 +58,14 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     {
         if (Input.GetMouseButtonDown(0) && runActive && Globals.isGameActive)
         {
+            transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
             pressActive = true;
             m_previousX = Input.mousePosition.x;
             dX = 0f;
             anim.SetBool("run", true);
+            pushAnimSelect = Random.Range(0, 2);
+            string[] pushAn = { "push1", "push2" };
+            anim.SetTrigger(pushAn[pushAnimSelect]);
             StartCoroutine(run());
             StartCoroutine(timeSet());
             _vehicle.push = false;
@@ -125,8 +130,11 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         cam1.Priority = 0;
         cam2.Priority = 1;
         cam3.Priority = 0;
-
-        float counter = 0f;
+        if (pushAnimSelect == 1)
+        {
+            transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 1f);
+        }
+            float counter = 0f;
         float waitingTime = 0.5f;
         while (counter < waitingTime)
         {
@@ -162,14 +170,25 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         {
             counter +=540 * Time.deltaTime;
 
-            transform.rotation = Quaternion.Euler(0, counter, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (pushAnimSelect == 1)
+            {
+                transform.rotation = Quaternion.Euler(0, counter, 0);
+            }
 
 
             transform.parent.position = Vector3.MoveTowards(transform.parent.position, new Vector3(0, transform.parent.position.y, transform.parent.position.z), 8 * Time.deltaTime);
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0, transform.localPosition.y, transform.localPosition.z), Time.deltaTime);
             yield return null;
         }
-        transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (pushAnimSelect == 1)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         yield return new WaitForSeconds(1f);
         if (!pressActive)
         {
