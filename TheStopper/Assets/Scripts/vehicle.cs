@@ -11,6 +11,7 @@ public class vehicle : MonoBehaviour
   public  bool hitting = false;
   public  bool push = false;
     [SerializeField] float hitPeriod;
+    float hitPeriodFirst;
 
     [SerializeField] TextMeshProUGUI vehiclelevelText;
     [SerializeField] int vehiclePower;
@@ -22,6 +23,7 @@ public class vehicle : MonoBehaviour
     [SerializeField] GameObject crashParticle;
     void Start()
     {
+        hitPeriodFirst = hitPeriod;
         _skinnedMeshRenderer.SetBlendShapeWeight(0, 0);
         if (GetComponent<Animator>() != null)
         {
@@ -96,27 +98,36 @@ public class vehicle : MonoBehaviour
         vehicleFirstHitPower = vehiclePower;
         float counter = 0f;
         float angle = 0f;
-        transform.position += new Vector3(0, -5, 0);
-        while(counter < Mathf.PI)
+
+        targetPlayer.transform.GetChild(1).localPosition = new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, -0.5f);
+
+        //transform.position += new Vector3(0, -5, 0);
+        while (counter < Mathf.PI)
         {
-            transform.position = new Vector3(transform.position.x, -4, targetPlayer.GetChild(1).position.z - 2);
+            targetPlayer.transform.GetChild(1).localPosition = Vector3.MoveTowards(targetPlayer.transform.GetChild(1).localPosition, new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, -0.5f), Time.deltaTime);
+
+            //transform.position = new Vector3(transform.position.x, -4, targetPlayer.GetChild(1).position.z - 2);
             counter += 5 * Time.deltaTime;
-            angle = 10 * Mathf.Sin(counter);
+            angle = 15 * Mathf.Sin(counter);
             transform.rotation = Quaternion.Euler(angle, 0, 0);
             yield return null;
         }
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+
+        targetPlayer.transform.GetChild(1).localPosition = new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, -0.5f);
+
+        //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
     IEnumerator pushPlayer()
     {
+        hitPeriod = hitPeriodFirst;
         if (GetComponent<Animator>() != null)
         {
             anim.enabled = true;
             anim.SetBool("push", true);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         while (hitting && push)
         {
             if (Globals.power <= 5)
@@ -127,7 +138,12 @@ public class vehicle : MonoBehaviour
             {
                 power.Instance.sweatingParticle.SetActive(true);
                 Globals.playerColorActive = true;
-            }       
+                hitPeriod = hitPeriodFirst;
+            }
+            else
+            {
+                hitPeriod -= 0.001f;
+            }
             if (Globals.power == 0)
             {
                 power.Instance.sweatingParticle.SetActive(false);
@@ -195,7 +211,7 @@ public class vehicle : MonoBehaviour
     IEnumerator pushMoveSpeed()
     {
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         while (hitting && push)
         {
             targetPlayer.parent.Translate(Vector3.forward * Time.deltaTime * (float)vehiclePower / (float)vehicleFirstHitPower * pushSpeed);

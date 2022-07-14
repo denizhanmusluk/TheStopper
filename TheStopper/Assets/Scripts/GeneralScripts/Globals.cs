@@ -11,4 +11,5 @@ public static class Globals
     public static int moneyAmount = 0;
     public static int power = 0;
     public static bool playerColorActive = false;
+    public static bool pushActive = false;
 }

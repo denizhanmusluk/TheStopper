@@ -7,7 +7,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     [SerializeField] public float bounding;
     [SerializeField] public float steeringSpeed = 180;
     [SerializeField] public float maxAngle;
-    [Range(0.0f, 10.0f)]  [SerializeField] float Controlsensivity;
+    [Range(0.0f, 25.0f)]  [SerializeField] float Controlsensivity;
     public float moveSpeed = 15;
 
     private float m_previousX;
@@ -58,6 +58,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     {
         if (Input.GetMouseButtonDown(0) && runActive && Globals.isGameActive)
         {
+            Globals.pushActive = false;
             transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
             pressActive = true;
             m_previousX = Input.mousePosition.x;
@@ -65,6 +66,15 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
             anim.SetBool("run", true);
             pushAnimSelect = Random.Range(0, 2);
             string[] pushAn = { "push1", "push2" };
+            Debug.Log(pushAnimSelect);
+            if (pushAnimSelect == 1)
+            {
+                anim.SetBool("turn", true);
+            }
+            else
+            {
+                anim.SetBool("turn", false);
+            }
             anim.SetTrigger(pushAn[pushAnimSelect]);
             StartCoroutine(run());
             StartCoroutine(timeSet());
@@ -73,6 +83,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         }
         if (Input.GetMouseButtonUp(0) && runActive && pressActive && Globals.isGameActive)
         {
+            Globals.pushActive = true;
             dX = 0f;
             runActive = false;
             pressActive = false;
@@ -80,7 +91,6 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
             anim.SetBool("run", false);
             StartCoroutine(Stop());
             StartCoroutine(runActivation());
-
         }
 
 
@@ -106,7 +116,16 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
                 break;
             case States.backStop:
                 {
-
+                    if (pushAnimSelect == 1)
+                    {
+                        transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0.75f);
+                    }
+                    else
+                    {
+                        
+                            //transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
+                        
+                    }
                 }
                 break;
 
@@ -122,7 +141,7 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     }
     IEnumerator runActivation()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.02f);
         runActive = true;
     }
     IEnumerator Stop()
@@ -132,12 +151,16 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         cam3.Priority = 0;
         if (pushAnimSelect == 1)
         {
-            transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 1f);
+            transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0.75f);
         }
             float counter = 0f;
         float waitingTime = 0.5f;
         while (counter < waitingTime)
         {
+            if (pressActive)
+            {
+                break;
+            }
             counter += Time.deltaTime;
             if (moveSpeed > 0)
             {
@@ -155,11 +178,15 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
 
             yield return null;
         }
-        _vehicle.currentState = vehicle.States.push;
+        if (!pressActive)
+        {
+            Debug.Log("turn");
+            _vehicle.currentState = vehicle.States.push;
 
-        currentBehaviour = States.backStop;
-        StartCoroutine(turnBack());
-        moveSpeed = 0;
+            currentBehaviour = States.backStop;
+            StartCoroutine(turnBack());
+            moveSpeed = 0;
+        }
     }
     IEnumerator turnBack()
     {
@@ -168,26 +195,38 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         yield return new WaitForSeconds(0.1f);
         while (counter < angle)
         {
+        
             counter +=540 * Time.deltaTime;
 
-            transform.rotation = Quaternion.Euler(0, 0, 0);
             if (pushAnimSelect == 1)
             {
                 transform.rotation = Quaternion.Euler(0, counter, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
 
             transform.parent.position = Vector3.MoveTowards(transform.parent.position, new Vector3(0, transform.parent.position.y, transform.parent.position.z), 8 * Time.deltaTime);
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0, transform.localPosition.y, transform.localPosition.z), Time.deltaTime);
             yield return null;
+            if (pressActive)
+            {
+                break;
+            }
         }
-        if (pushAnimSelect == 1)
+        if (!pressActive)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            if (pushAnimSelect == 1)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         yield return new WaitForSeconds(1f);
         if (!pressActive)

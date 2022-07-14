@@ -15,7 +15,7 @@ public class Obstacle : MonoBehaviour
     {
         obstacleHit(other.gameObject);
         GetComponent<Collider>().enabled = false;
-        if (other.GetComponent<playerBehaviour>() != null)
+        if (other.GetComponent<playerBehaviour>() != null && !Globals.pushActive)
         {
             power.Instance.powerUpdate(-damage);
         }
