@@ -61,7 +61,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8939308947405701639, guid: 09046c1eaad23ad4a90ba9298c9b6047, type: 3}
+  - {fileID: 2100000, guid: 9de87feb6f2f52a47b0a8271c84acd34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15733,10 +15733,14 @@ MonoBehaviour:
   hitPeriod: 0.05
   vehiclelevelText: {fileID: 2308907922585035876}
   vehiclePower: 100
-  blendPower: 50
+  maxPower: 0
   pushSpeed: 100
   currentPushSpeed: 0
   crashParticle: {fileID: 2308907922164910315}
+  firstCamPosition: {fileID: 0}
+  lastCamPosition: {fileID: 0}
+  cam: {fileID: 0}
+  groundMat: {fileID: 2100000, guid: d9cf210c283ee224daa1eb7bd4d78781, type: 2}
 --- !u!54 &3458363573978015441
 Rigidbody:
   m_ObjectHideFlags: 0

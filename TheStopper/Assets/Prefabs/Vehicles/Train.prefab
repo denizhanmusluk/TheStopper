@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b4d4fec534ba041909fc8b4d842fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skinnedMeshRenderer: {fileID: 0}
   currentState: 0
   followingPoint: {fileID: 0}
   targetPlayer: {fileID: 0}
@@ -91,9 +92,14 @@ MonoBehaviour:
   hitPeriod: 0.05
   vehiclelevelText: {fileID: 2676051753951834416}
   vehiclePower: 400
+  maxPower: 0
   pushSpeed: 100
   currentPushSpeed: 0
   crashParticle: {fileID: 2676051754356662276}
+  firstCamPosition: {fileID: 0}
+  lastCamPosition: {fileID: 0}
+  cam: {fileID: 0}
+  groundMat: {fileID: 2100000, guid: d9cf210c283ee224daa1eb7bd4d78781, type: 2}
 --- !u!114 &2676051754311405526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3721,7 +3727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 39b7f43c6b8284ca990c83f4643f56ae, type: 2}
+  - {fileID: 2100000, guid: bd558a61ae996ac46b4b60fdaf27701e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

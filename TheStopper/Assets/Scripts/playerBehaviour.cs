@@ -21,7 +21,7 @@ public class playerBehaviour : MonoBehaviour
         {
             other.GetComponent<item>().collectable = false;
             power.Instance.powerUpdate(other.GetComponent<item>().powerValue);
-            other.GetComponent<item>().collectItem();
+            other.GetComponent<item>().collect(this.transform);
         }
     }
     public void rightFoot()

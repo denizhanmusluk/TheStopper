@@ -11,8 +11,8 @@ public class platformCreator : MonoBehaviour
         {
             //GetComponent<Collider>().enabled = false;
             int platformSelect = Random.Range(0, platforms.Length);
-            Instantiate(platforms[platformSelect], transform.position + new Vector3(0, 0, 2000), Quaternion.identity);
-            transform.position += new Vector3(0, 0, 2000);
+            Instantiate(platforms[platformSelect], transform.position + new Vector3(0, 0, 1000), Quaternion.identity);
+            transform.position += new Vector3(0, 0, 1000);
         }
     }
 }

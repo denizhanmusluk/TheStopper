@@ -7,6 +7,8 @@ public class item : MonoBehaviour
     public int powerValue;
     public bool collectable = true;
     int[] rotateDirection = { -1, 1 };
+    Transform target;
+    float motionSpeed = 50;
     private void Start()
     {
         StartCoroutine(rotation());
@@ -43,5 +45,49 @@ public class item : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, rotDir * counter, transform.eulerAngles.z);
             yield return null;
         }
+    }
+    IEnumerator targetMotion()
+    {
+        //particle.SetActive(false);
+
+        GetComponent<SphereCollider>().enabled = false;
+        float counter = 0f;
+        float angle = 0f;
+        Vector3 dirVect = (transform.position - target.position).normalized;
+
+
+
+        while (counter < Mathf.PI / 2)
+        {
+            counter += 6 * Time.deltaTime;
+            angle = 100 * Mathf.Cos(counter);
+            dirVect = new Vector3(dirVect.x, 0.3f, dirVect.z);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + dirVect * angle, counter * motionSpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, transform.position + dirVect * angle + new Vector3(0, 0.5f, 0), counter * motionSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        while (Vector3.Distance(transform.position, target.position + new Vector3(0,15,0)) > 1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position + new Vector3(0, 15, 0), (3 + Mathf.Abs(5 - 0.3f * Vector3.Distance(transform.position, target.position + new Vector3(0, 15, 0)))) * motionSpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target.position, (40 / Vector3.Distance(transform.position, target.position)) * motionSpeed * Time.deltaTime);
+            yield return null;
+        }
+        //TapticManager.Impact(ImpactFeedback.Light);
+
+
+
+        //Destroy(particle);
+
+        //target.GetComponent<PlayerParent>().playerYearSet(1);
+        GameObject money = gameObject;
+        money.transform.parent = null;
+        Destroy(money);
+    }
+    public void collect(Transform moneyTarget)
+    {
+        transform.parent = moneyTarget;
+        target = moneyTarget;
+        StartCoroutine(targetMotion());
     }
 }

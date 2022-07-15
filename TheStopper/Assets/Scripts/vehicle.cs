@@ -2,36 +2,84 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class vehicle : MonoBehaviour
+using Cinemachine;
+
+public class vehicle : MonoBehaviour,IStartGameObserver
 {
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     public enum States { follow, push ,win,fail}
     public States currentState;
     [SerializeField] Transform followingPoint, targetPlayer;
-  public  bool hitting = false;
-  public  bool push = false;
+    public bool hitting = false;
+    public bool push = false;
     [SerializeField] float hitPeriod;
     float hitPeriodFirst;
 
     [SerializeField] TextMeshProUGUI vehiclelevelText;
     [SerializeField] int vehiclePower;
-    [SerializeField] float blendPower;
-     int vehicleFirstHitPower;
+    [SerializeField] float maxPower;
+    int vehicleFirstHitPower;
     Animator anim;
     [SerializeField] float pushSpeed;
     [SerializeField] float currentPushSpeed;
     [SerializeField] GameObject crashParticle;
+
+    [SerializeField] public Transform firstCamPosition, lastCamPosition;
+    Vector3 camMoveDirection;
+    float camFactorDistance;
+    [SerializeField] public
+    CinemachineVirtualCamera cam;
+    [SerializeField] Material groundMat;
+    Vector3 vehicleFirstPos;
+   public float followSpeed = 90;
     void Start()
     {
+        vehicleFirstPos = transform.position;
+        StartCoroutine(firstAnim());
+        GameManager.Instance.Add_StartObserver(this);
+        maxPower = vehiclePower;
         hitPeriodFirst = hitPeriod;
         _skinnedMeshRenderer.SetBlendShapeWeight(0, 0);
         if (GetComponent<Animator>() != null)
         {
             anim = GetComponent<Animator>();
         }
-        vehiclelevelText.text = vehiclePower.ToString();
-    }
+        StartCoroutine(animatorSet());
 
+        vehiclelevelText.text = vehiclePower.ToString();
+
+
+        cam.transform.position = lastCamPosition.position;
+        camMoveDirection = (lastCamPosition.position - firstCamPosition.position).normalized;
+        camFactorDistance = Vector3.Distance(lastCamPosition.position, firstCamPosition.position);
+    }
+    IEnumerator animatorSet()
+    {
+        yield return new WaitForSeconds(1.33f);
+        if (GetComponent<Animator>() != null)
+        {
+            anim.enabled = false;
+        }
+    }
+    IEnumerator firstAnim()
+    {
+        float counter = 0f;
+        while (!Globals.isGameActive)
+        {
+            counter += Time.deltaTime;
+            groundMat.mainTextureOffset = new Vector2(0, -counter);
+            float val = Mathf.Abs(Mathf.Cos(counter));
+            transform.position = new Vector3(transform.position.x, transform.position.y, vehicleFirstPos.z + val * 10);
+
+
+            yield return null;
+        }
+        groundMat.mainTextureOffset = new Vector2(0, 0);
+    }
+    public void StartGame()
+    {
+        //anim.enabled = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -72,7 +120,7 @@ public class vehicle : MonoBehaviour
             anim.enabled = false;
         }
         hitting = false;
-        transform.position = Vector3.MoveTowards(transform.position, followingPoint.position, 90 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, followingPoint.position, followSpeed * Time.deltaTime);
     }
     void moveToTarget()
     {
@@ -104,7 +152,7 @@ public class vehicle : MonoBehaviour
         //transform.position += new Vector3(0, -5, 0);
         while (counter < Mathf.PI)
         {
-            targetPlayer.transform.GetChild(1).localPosition = Vector3.MoveTowards(targetPlayer.transform.GetChild(1).localPosition, new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, -0.5f), Time.deltaTime);
+            targetPlayer.transform.GetChild(1).localPosition = Vector3.MoveTowards(targetPlayer.transform.GetChild(1).localPosition, new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, 0), Time.deltaTime);
 
             //transform.position = new Vector3(transform.position.x, -4, targetPlayer.GetChild(1).position.z - 2);
             counter += 5 * Time.deltaTime;
@@ -114,7 +162,7 @@ public class vehicle : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        targetPlayer.transform.GetChild(1).localPosition = new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, -0.5f);
+        targetPlayer.transform.GetChild(1).localPosition = new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, 0);
 
         //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
@@ -170,9 +218,13 @@ public class vehicle : MonoBehaviour
                 break;
 
             }
-            if (vehiclePower <= blendPower)
+            if (vehiclePower / maxPower < 1f / 4f)
             {
-                _skinnedMeshRenderer.SetBlendShapeWeight(0, 100f * (1f - (vehiclePower / blendPower)));
+                _skinnedMeshRenderer.SetBlendShapeWeight(0, 200f * ((2f / 4f) - (vehiclePower / maxPower)));
+            }
+            else if (vehiclePower / maxPower < 3f / 4f)
+            {
+                _skinnedMeshRenderer.SetBlendShapeWeight(0, 100f * ((3f / 4f) - (vehiclePower / maxPower)));
             }
 
             power.Instance.powerUpdate(-1);
@@ -185,6 +237,10 @@ public class vehicle : MonoBehaviour
                 vehiclelevelText.text = ((int)val).ToString();
             });
             //pushMoveSpeed((float)vehiclePower/(float)vehicleFirstHitPower);
+            // cam.transform.position = new Vector3((0.5f * camFactorDistance * camMoveDirection.x) + firstCamPosition.position.x, ( 0.5f * camFactorDistance * camMoveDirection.y) + firstCamPosition.position.y, (0.5f * camFactorDistance * camMoveDirection.z) + firstCamPosition.position.z);
+            cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(((1 - (float)vehiclePower / (float)vehicleFirstHitPower) * camFactorDistance * camMoveDirection.x) + firstCamPosition.position.x, ((1 - (float)vehiclePower / (float)vehicleFirstHitPower) * camFactorDistance * camMoveDirection.y) + firstCamPosition.position.y, ((1 - (float)vehiclePower / (float)vehicleFirstHitPower) * camFactorDistance * camMoveDirection.z) + firstCamPosition.position.z),50* Time.deltaTime);
+            cam.m_Lens.FieldOfView = (130- (30 - 30 * (float)vehiclePower / (float)vehicleFirstHitPower));
+
             yield return new WaitForSeconds(hitPeriod);
         }
     }

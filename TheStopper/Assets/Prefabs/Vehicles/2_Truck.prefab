@@ -62,7 +62,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4980941884181843539, guid: 25024f22a1cc2574193e523ed90767bd, type: 3}
+  - {fileID: 2100000, guid: 86d6e7b3dba051d428bb962e4451f61a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19197,7 +19197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527774349853177473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.521, y: 2.0746999, z: 3.462}
+  m_LocalPosition: {x: 0.521, y: 2.0746999, z: 3.522}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3527774350460999030}
@@ -19515,7 +19515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527774350171710495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.521, y: 2.0746999, z: 3.462}
+  m_LocalPosition: {x: -0.521, y: 2.075, z: 3.522}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3527774350460999030}
@@ -34356,10 +34356,15 @@ MonoBehaviour:
   hitPeriod: 0.05
   vehiclelevelText: {fileID: 3527774349904951044}
   vehiclePower: 200
-  blendPower: 0
+  maxPower: 0
   pushSpeed: 50
   currentPushSpeed: 0
   crashParticle: {fileID: 3527774349726605437}
+  firstCamPosition: {fileID: 0}
+  lastCamPosition: {fileID: 0}
+  cam: {fileID: 0}
+  groundMat: {fileID: 2100000, guid: d9cf210c283ee224daa1eb7bd4d78781, type: 2}
+  followSpeed: 90
 --- !u!114 &4914557511598426793
 MonoBehaviour:
   m_ObjectHideFlags: 0

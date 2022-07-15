@@ -23,6 +23,9 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     bool pressActive = false;
     Animator anim;
     float firstSpeed;
+    [SerializeField] Transform firstCamPosition, lastCamPosition;
+    Vector3 camMoveDirection;
+    float camFactorDistance;
     [SerializeField] CinemachineVirtualCamera cam1, cam2, cam3;
     [SerializeField] CinemachineVirtualCamera failCam;
     public vehicle _vehicle;
@@ -40,7 +43,9 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         moveSpeed = 0f;
         anim = GetComponent<Animator>();
         playerFirstPos = transform.position;
-
+        //cam2.transform.position = firstCamPosition.position;
+        //camMoveDirection = (lastCamPosition.position - firstCamPosition.position).normalized;
+        //camFactorDistance = Vector3.Distance(lastCamPosition.position, firstCamPosition.position);
     }
     public void LoseScenario()
     {
@@ -52,12 +57,23 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     public void WinScenario()
     {
         anim.SetTrigger("finish");
+        transform.GetComponent<Collider>().isTrigger = false;
+        transform.GetComponent<Rigidbody>().isKinematic = false;
+        transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+        LeanTween.value(100, 130, 1f).setOnUpdate((float val) =>
+        {
+            cam2.m_Lens.FieldOfView = val;
+        });
+        
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && runActive && Globals.isGameActive)
         {
+            cam2.transform.position = _vehicle.firstCamPosition.position;
+            cam2.m_Lens.FieldOfView = 130;
             Globals.pushActive = false;
             transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
             pressActive = true;
@@ -231,13 +247,15 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         yield return new WaitForSeconds(1f);
         if (!pressActive)
         {
-            cam1.Priority = 0;
-            cam2.Priority = 0;
-            cam3.Priority = 1;
+            //cam1.Priority = 0;
+            //cam2.Priority = 0;
+            //cam3.Priority = 1;
         }
     }
     IEnumerator run()
     {
+        _vehicle.currentState = vehicle.States.follow;
+        _vehicle.followSpeed = 45;
         swipeActive = false;
         currentBehaviour = States.forward;
 
@@ -262,8 +280,8 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         {
             moveSpeed = firstSpeed;
         }
-
-        _vehicle.currentState = vehicle.States.follow;
+        _vehicle.followSpeed = 90;
+        //_vehicle.currentState = vehicle.States.follow;
         swipeActive = true;
         m_previousX = Input.mousePosition.x;
         dX = 0f;
