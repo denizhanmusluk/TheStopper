@@ -12,4 +12,8 @@ public static class Globals
     public static int power = 0;
     public static bool playerColorActive = false;
     public static bool pushActive = false;
+    public static bool mousePress = false;
+    public static bool mousePressUp = false;
+    public static bool jumpActive = false;
+
 }

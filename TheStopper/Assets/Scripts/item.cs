@@ -63,13 +63,18 @@ public class item : MonoBehaviour
             angle = 100 * Mathf.Cos(counter);
             dirVect = new Vector3(dirVect.x, 0.3f, dirVect.z);
             transform.position = Vector3.MoveTowards(transform.position, transform.position + dirVect * angle, counter * motionSpeed * Time.deltaTime);
+            transform.localScale = new Vector3(transform.localScale.x - 0.5f * Time.deltaTime, transform.localScale.y - 0.5f * Time.deltaTime, transform.localScale.z - 0.5f * Time.deltaTime);
+
+            //transform.localScale -= new Vector3(0.005f, 0.005f, 0.005f);
+
             //transform.position = Vector3.MoveTowards(transform.position, transform.position + dirVect * angle + new Vector3(0, 0.5f, 0), counter * motionSpeed * Time.deltaTime);
             yield return null;
         }
 
         while (Vector3.Distance(transform.position, target.position + new Vector3(0,15,0)) > 1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position + new Vector3(0, 15, 0), (3 + Mathf.Abs(5 - 0.3f * Vector3.Distance(transform.position, target.position + new Vector3(0, 15, 0)))) * motionSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position + new Vector3(0, 15, 0), (1 + Mathf.Abs(3 - 0.1f * Vector3.Distance(transform.position, target.position + new Vector3(0, 15, 0)))) * motionSpeed * Time.deltaTime);
+            transform.localScale = new Vector3(transform.localScale.x - 0.5f * Time.deltaTime, transform.localScale.y - 0.5f * Time.deltaTime, transform.localScale.z - 0.5f * Time.deltaTime);
             //transform.position = Vector3.MoveTowards(transform.position, target.position, (40 / Vector3.Distance(transform.position, target.position)) * motionSpeed * Time.deltaTime);
             yield return null;
         }

@@ -24,12 +24,13 @@ public class platformEdge : MonoBehaviour
     }
     IEnumerator fallCheck(GameObject player)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         if (!player.GetComponent<playerBehaviour>().playerFall && triggerTime< counter)
         {
             player.GetComponent<playerBehaviour>().playerFall = true;
             GameManager.Instance.Notify_LoseObservers();
             player.GetComponent<Ragdoll>().RagdollActivateWithForce(true, new Vector3(0, -1, 5));
+            Globals.power = 0;
         }
     }
 }

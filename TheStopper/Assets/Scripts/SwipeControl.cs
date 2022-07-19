@@ -23,16 +23,20 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
     bool pressActive = false;
     Animator anim;
     float firstSpeed;
-    [SerializeField] Transform firstCamPosition, lastCamPosition;
-    Vector3 camMoveDirection;
-    float camFactorDistance;
-    [SerializeField] CinemachineVirtualCamera cam1, cam2, cam3;
+
+    [SerializeField] public CinemachineVirtualCamera cam1, cam2, cam3;
     [SerializeField] CinemachineVirtualCamera failCam;
     public vehicle _vehicle;
     bool swipeActive = true;
     int pushAnimSelect = 0;
+    [SerializeField] GameObject leftFood, rightFood;
+    Vector3 camFirstPoint, camLastPoint;
     private void Start()
     {
+        camFirstPoint = _vehicle.firstCamPosition.localPosition;
+        camLastPoint = _vehicle.lastCamPosition.localPosition;
+        leftFood.SetActive(false);
+        rightFood.SetActive(false);
         GameManager.Instance.Add_LoseObserver(this);
         GameManager.Instance.Add_WinObserver(this);
 
@@ -52,29 +56,44 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         GameManager.Instance.Remove_LoseObserver(this);
         failCam.Priority = 10;
         failCam.LookAt = transform.GetChild(2).GetChild(0).transform;
-
+        rightFood.SetActive(false);
+        leftFood.SetActive(false);
     }
     public void WinScenario()
     {
+        StartCoroutine(finishRotate());
         anim.SetTrigger("finish");
         transform.GetComponent<Collider>().isTrigger = false;
         transform.GetComponent<Rigidbody>().isKinematic = false;
         transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
+        rightFood.SetActive(false);
+        leftFood.SetActive(false);
         LeanTween.value(100, 130, 1f).setOnUpdate((float val) =>
         {
             cam2.m_Lens.FieldOfView = val;
         });
-        
+
+    }
+    IEnumerator finishRotate()
+    {
+        float counter = 0f;
+        while (counter < 2f)
+        {
+            counter += Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, 0, transform.eulerAngles.z), 2 * steeringSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && runActive && Globals.isGameActive)
+        if ((Input.GetMouseButtonDown(0) && runActive && Globals.isGameActive) || Globals.mousePress)
         {
+            leftFood.SetActive(false);
+            rightFood.SetActive(false);
+
             cam2.transform.position = _vehicle.firstCamPosition.position;
             cam2.m_Lens.FieldOfView = 130;
-            Globals.pushActive = false;
             transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
             pressActive = true;
             m_previousX = Input.mousePosition.x;
@@ -86,10 +105,17 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
             if (pushAnimSelect == 1)
             {
                 anim.SetBool("turn", true);
+
+      
+                _vehicle.firstCamPosition.localPosition = camFirstPoint + new Vector3(0, 0, 0.5f);
+                _vehicle.lastCamPosition.localPosition = camLastPoint + new Vector3(0, 0, 0.5f);
+
             }
             else
             {
                 anim.SetBool("turn", false);
+                _vehicle.firstCamPosition.localPosition = camFirstPoint;
+                _vehicle.lastCamPosition.localPosition = camLastPoint;
             }
             anim.SetTrigger(pushAn[pushAnimSelect]);
             StartCoroutine(run());
@@ -97,16 +123,19 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
             _vehicle.push = false;
             power.Instance.sweatingParticle.SetActive(false);
         }
-        if (Input.GetMouseButtonUp(0) && runActive && pressActive && Globals.isGameActive)
+        if ((Input.GetMouseButtonUp(0) && runActive && pressActive && Globals.isGameActive) || Globals.mousePressUp)
         {
-            Globals.pushActive = true;
-            dX = 0f;
-            runActive = false;
-            pressActive = false;
+            if (!Globals.jumpActive)
+            {
+                dX = 0f;
+                runActive = false;
+                pressActive = false;
 
-            anim.SetBool("run", false);
-            StartCoroutine(Stop());
-            StartCoroutine(runActivation());
+                anim.SetBool("run", false);
+                StartCoroutine(Stop());
+                StartCoroutine(runActivation());
+            }
+  
         }
 
 
@@ -124,6 +153,8 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
                     {
                         if (swipeActive)
                         {
+                            leftFood.SetActive(false);
+                            rightFood.SetActive(false);
                             controlUpdate();
                         }
                         transform.parent.transform.Translate(transform.parent.transform.forward * Time.deltaTime * moveSpeed);
@@ -138,9 +169,10 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
                     }
                     else
                     {
-                        
-                            //transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
-                        
+
+                        //transform.GetChild(1).localPosition = new Vector3(transform.GetChild(1).localPosition.x, transform.GetChild(1).localPosition.y, 0);
+                        Globals.pushActive = true;
+
                     }
                 }
                 break;
@@ -251,9 +283,12 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
             //cam2.Priority = 0;
             //cam3.Priority = 1;
         }
+        leftFood.SetActive(true);
+        rightFood.SetActive(true);
     }
     IEnumerator run()
     {
+       
         _vehicle.currentState = vehicle.States.follow;
         _vehicle.followSpeed = 45;
         swipeActive = false;
@@ -285,7 +320,8 @@ public class SwipeControl : MonoBehaviour,ILoseObserver,IWinObserver
         swipeActive = true;
         m_previousX = Input.mousePosition.x;
         dX = 0f;
-
+        yield return new WaitForSeconds(1f);
+        Globals.pushActive = false;
     }
     private void controlUpdate()
     {

@@ -11,6 +11,10 @@ public class power : MonoBehaviour,ILoseObserver
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] SkinnedMeshRenderer playerMesh;
     [SerializeField] Material firstMaterial, redMaterial;
+
+   public float MaxPowerSize;
+    Transform player;
+    float scaleFactor;
     void Awake()
     {
         if (Instance == null)
@@ -20,6 +24,8 @@ public class power : MonoBehaviour,ILoseObserver
     }
     void Start()
     {
+        player = transform.parent;
+
         sweatingParticle.SetActive(false);
         Globals.playerColorActive = false;
         playerMesh.material = firstMaterial;
@@ -28,7 +34,15 @@ public class power : MonoBehaviour,ILoseObserver
         levelText.text = ((int)Globals.power).ToString();
         GameManager.Instance.Add_LoseObserver(this);
     }
-
+    IEnumerator startDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (Globals.power <= MaxPowerSize)
+        {
+            scaleFactor = 0.4f * Globals.power / MaxPowerSize;
+            player.localScale = new Vector3(0.9f + scaleFactor, 0.9f + scaleFactor, 0.9f + scaleFactor);
+        }
+    }
     public void LoseScenario()
     {
         GameManager.Instance.Remove_LoseObserver(this);
@@ -50,24 +64,45 @@ public class power : MonoBehaviour,ILoseObserver
         if (Globals.power < 20 && Globals.playerColorActive)
         {
             playerMesh.material = redMaterial;
-            if (Globals.power > 10)
+            if (Globals.power < 10)
             {
-                float green = (float)Globals.power / 20f;
-                float blue = ((float)Globals.power - 10) / 10;
-                redMaterial.color = new Color(1, green, blue);
-            }
-            else
-            {
+
                 ParticleSystem ps1 = sweatingParticle.transform.GetChild(0).GetComponent<ParticleSystem>();
                 ParticleSystem ps2 = sweatingParticle.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
                 var main1 = ps1.main;
                 var main2 = ps2.main;
                 main1.duration = 0.1f + (float)Globals.power / 10f;
                 main2.duration = 0.1f + (float)Globals.power / 10f;
-                float green = (float)Globals.power / 20f;
-                float blue = 0;
-                redMaterial.color = new Color(1, green, blue);
+                float red = firstMaterial.color.r + (1 - firstMaterial.color.r) * (1 - Globals.power / 20f);
+                float green = firstMaterial.color.g * Globals.power / 10f;
+                float blue = firstMaterial.color.b * Globals.power / 20f;
+                redMaterial.color = new Color(1, green, 0);
             }
+            else
+            {
+                float red = firstMaterial.color.r + (1 - firstMaterial.color.r) * (1 - (Globals.power - 10) / 10f);
+                float green = firstMaterial.color.g * (Globals.power + 20 )/ 40f;
+                float blue = firstMaterial.color.b * (Globals.power - 10)/ 10f;
+                redMaterial.color = new Color(red, green, blue);
+            }
+            //if (Globals.power > 10)
+            //{
+            //    float green = (float)Globals.power / 20f;
+            //    float blue = ((float)Globals.power - 10) / 10;
+            //    redMaterial.color = new Color(1, green, blue);
+            //}
+            //else
+            //{
+            //    ParticleSystem ps1 = sweatingParticle.transform.GetChild(0).GetComponent<ParticleSystem>();
+            //    ParticleSystem ps2 = sweatingParticle.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+            //    var main1 = ps1.main;
+            //    var main2 = ps2.main;
+            //    main1.duration = 0.1f + (float)Globals.power / 10f;
+            //    main2.duration = 0.1f + (float)Globals.power / 10f;
+            //    float green = (float)Globals.power / 20f;
+            //    float blue = 0;
+            //    redMaterial.color = new Color(1, green, blue);
+            //}
         }
         else
         {
@@ -86,7 +121,11 @@ public class power : MonoBehaviour,ILoseObserver
             levelText.text = ((int)val).ToString();
         });
         //PlayerPrefs.SetInt("power", Globals.power);
-
+        if (Globals.power <= MaxPowerSize)
+        {
+            scaleFactor = 0.4f * Globals.power / MaxPowerSize;
+            player.localScale = new Vector3(0.9f + scaleFactor, 0.9f + scaleFactor, 0.9f + scaleFactor);
+        }
     }
 
     IEnumerator Scaling(Transform bagel)

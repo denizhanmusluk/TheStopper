@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
-public class vehicle : MonoBehaviour,IStartGameObserver
+public class vehicle : MonoBehaviour,IStartGameObserver,ILoseObserver
 {
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     public enum States { follow, push ,win,fail}
@@ -16,7 +16,7 @@ public class vehicle : MonoBehaviour,IStartGameObserver
     float hitPeriodFirst;
 
     [SerializeField] TextMeshProUGUI vehiclelevelText;
-    [SerializeField] int vehiclePower;
+    [SerializeField] public int vehiclePower;
     [SerializeField] float maxPower;
     int vehicleFirstHitPower;
     Animator anim;
@@ -32,12 +32,20 @@ public class vehicle : MonoBehaviour,IStartGameObserver
     [SerializeField] Material groundMat;
     Vector3 vehicleFirstPos;
    public float followSpeed = 90;
+    [SerializeField] GameObject windParticle;
+    [SerializeField] GameObject tireSmokes;
+    [SerializeField] ParticleSystem[] windParticles;
     void Start()
     {
+        Globals.finish = false;
+        tireSmokes.SetActive(true);
         vehicleFirstPos = transform.position;
         StartCoroutine(firstAnim());
+        StartCoroutine(tiling());
         GameManager.Instance.Add_StartObserver(this);
+        GameManager.Instance.Add_LoseObserver(this);
         maxPower = vehiclePower;
+        power.Instance.MaxPowerSize = vehiclePower * 1.3f;
         hitPeriodFirst = hitPeriod;
         _skinnedMeshRenderer.SetBlendShapeWeight(0, 0);
         if (GetComponent<Animator>() != null)
@@ -53,6 +61,10 @@ public class vehicle : MonoBehaviour,IStartGameObserver
         camMoveDirection = (lastCamPosition.position - firstCamPosition.position).normalized;
         camFactorDistance = Vector3.Distance(lastCamPosition.position, firstCamPosition.position);
     }
+    public void LoseScenario()
+    {
+        currentState = States.fail;
+    }
     IEnumerator animatorSet()
     {
         yield return new WaitForSeconds(1.33f);
@@ -61,20 +73,90 @@ public class vehicle : MonoBehaviour,IStartGameObserver
             anim.enabled = false;
         }
     }
+    IEnumerator tiling()
+    {
+        float counter = 0f;
+        while (!Globals.isGameActive)
+        {
+            counter += 0.5f * Time.deltaTime;
+            groundMat.mainTextureOffset = new Vector2(0, -counter);
+            yield return null;
+        }
+        groundMat.mainTextureOffset = new Vector2(0, 0);
+    }
     IEnumerator firstAnim()
     {
         float counter = 0f;
         while (!Globals.isGameActive)
         {
-            counter += Time.deltaTime;
-            groundMat.mainTextureOffset = new Vector2(0, -counter);
-            float val = Mathf.Abs(Mathf.Cos(counter));
-            transform.position = new Vector3(transform.position.x, transform.position.y, vehicleFirstPos.z + val * 10);
+            float distance = Random.Range(10f, 15f);
+            float speed = Random.Range(0.5f, 1.5f);
+            while (counter < Mathf.PI / 2)
+            {
+                counter += speed* Time.deltaTime;
+                float val = Mathf.Abs(Mathf.Sin(counter));
+                transform.position = new Vector3(transform.position.x, transform.position.y, vehicleFirstPos.z + val * distance);
+                if (Globals.isGameActive)
+                {
+                    break;
+                }
+                yield return null;
+            }
 
+            if (GetComponent<Animator>() != null)
+            {
+                anim.enabled = true;
+                anim.SetBool("push", true);
+            }
+            if (Globals.isGameActive)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            if (Globals.isGameActive)
+            {
+                break;
+            }
+            if (GetComponent<Animator>() != null)
+            {
+                anim.enabled = false;
+                anim.SetBool("push", false);
+            }
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
 
-            yield return null;
+            while (counter < Mathf.PI)
+            {
+                if (Globals.isGameActive)
+                {
+                    break;
+                }
+
+                counter += 0.3f* Time.deltaTime;
+                float val = Mathf.Abs(Mathf.Sin(counter));
+                transform.position = new Vector3(transform.position.x, transform.position.y, vehicleFirstPos.z + val * distance);
+                yield return null;
+            }
+            counter = 0f;
+            if (GetComponent<Animator>() != null)
+            {
+                anim.enabled = true;
+                anim.SetBool("push", true);
+            }
+            if (Globals.isGameActive)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(Random.Range(0, 4f));
+            if (Globals.isGameActive)
+            {
+                break;
+            }
+            if (GetComponent<Animator>() != null)
+            {
+                anim.SetBool("push", false);
+                anim.enabled = false;
+            }
         }
-        groundMat.mainTextureOffset = new Vector2(0, 0);
     }
     public void StartGame()
     {
@@ -143,6 +225,8 @@ public class vehicle : MonoBehaviour,IStartGameObserver
     }
     IEnumerator hitPlayer()
     {
+        hitPeriod = 1f;
+
         vehicleFirstHitPower = vehiclePower;
         float counter = 0f;
         float angle = 0f;
@@ -163,12 +247,18 @@ public class vehicle : MonoBehaviour,IStartGameObserver
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
         targetPlayer.transform.GetChild(1).localPosition = new Vector3(targetPlayer.transform.GetChild(1).localPosition.x, targetPlayer.transform.GetChild(1).localPosition.y, 0);
+        //yield return new WaitForSeconds(1f);
+        LeanTween.value(1, hitPeriodFirst, 1).setOnUpdate((float val) =>
+        {
+            hitPeriod = val;
+        });
+        hitPeriod = hitPeriodFirst;
 
         //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
     IEnumerator pushPlayer()
     {
-        hitPeriod = hitPeriodFirst;
+        windParticle.SetActive(true);
         if (GetComponent<Animator>() != null)
         {
             anim.enabled = true;
@@ -186,11 +276,11 @@ public class vehicle : MonoBehaviour,IStartGameObserver
             {
                 power.Instance.sweatingParticle.SetActive(true);
                 Globals.playerColorActive = true;
-                hitPeriod = hitPeriodFirst;
+                //hitPeriod = hitPeriodFirst;
             }
             else
             {
-                hitPeriod -= 0.001f;
+                //hitPeriod -= 0.001f;
             }
             if (Globals.power == 0)
             {
@@ -209,11 +299,13 @@ public class vehicle : MonoBehaviour,IStartGameObserver
             }
             if (vehiclePower == 0)
             {
+                tireSmokes.SetActive(false);
                 crashParticle.SetActive(true);
                 Destroy(crashParticle, 4);
                 GetComponent<Ragdoll>().RagdollActivateWithForce(true, new Vector3(0,2,2));
                 currentState = States.win;
                 hitting = false;
+                Globals.finish = true;
                 GameManager.Instance.Notify_WinObservers();
                 break;
 
@@ -243,6 +335,8 @@ public class vehicle : MonoBehaviour,IStartGameObserver
 
             yield return new WaitForSeconds(hitPeriod);
         }
+        windParticle.SetActive(false);
+
     }
 
 
@@ -270,6 +364,11 @@ public class vehicle : MonoBehaviour,IStartGameObserver
         //yield return new WaitForSeconds(0.5f);
         while (hitting && push)
         {
+            for(int i = 0;i< windParticles.Length; i++)
+            {
+                var _main = windParticles[i].main;
+                _main.simulationSpeed = 2 * (float)vehiclePower / (float)vehicleFirstHitPower;
+            }
             targetPlayer.parent.Translate(Vector3.forward * Time.deltaTime * (float)vehiclePower / (float)vehicleFirstHitPower * pushSpeed);
             yield return null;
         }

@@ -123,7 +123,6 @@ public class GameManager : MonoBehaviour, IWinObserver, ILoseObserver
     IEnumerator startDelay()
     {
         yield return new WaitForSeconds(0.1f);
-        Globals.finish = false;
         startButton.SetActive(false);
         Notify_GameStartObservers();
         yield return new WaitForSeconds(1f);
