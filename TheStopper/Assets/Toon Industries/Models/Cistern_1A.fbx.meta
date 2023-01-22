@@ -1,0 +1,194 @@
+fileFormatVersion: 2
+guid: f91262c629f4d403fad92567aaff0ba5
+timeCreated: 1511881845
+licenseType: Store
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Car_4B.001
+    100002: Car_4B_Addon.001
+    100004: Car_4E.002
+    100006: Car_4E.004
+    100008: //RootNode
+    100010: Wheel_4B_Addon_F.L.001
+    100012: Wheel_4B_Addon_F.R.001
+    100014: Wheel_4B_Addon_R.L.001
+    100016: Wheel_4B_Addon_R.R.001
+    100018: Wheel_4B_F.L.001
+    100020: Wheel_4B_F.R.001
+    100022: Wheel_4B_R.L.001
+    100024: Wheel_4B_R.R.001
+    100026: Cistern_1A_Addon
+    100028: Cistern_1A_Addon_Wheel_F.L
+    100030: Cistern_1A_Addon_Wheel_F.R
+    100032: Cistern_1A_Addon_Wheel_R.L
+    100034: Cistern_1A_Addon_Wheel_R.R
+    100036: Cistern_1A_Body
+    100038: Cistern_1A_Wheel_F.L
+    100040: Cistern_1A_Wheel_F.R
+    100042: Cistern_1A_Wheel_R.L
+    100044: Cistern_1A_Wheel_R.R
+    400000: Car_4B.001
+    400002: Car_4B_Addon.001
+    400004: Car_4E.002
+    400006: Car_4E.004
+    400008: //RootNode
+    400010: Wheel_4B_Addon_F.L.001
+    400012: Wheel_4B_Addon_F.R.001
+    400014: Wheel_4B_Addon_R.L.001
+    400016: Wheel_4B_Addon_R.R.001
+    400018: Wheel_4B_F.L.001
+    400020: Wheel_4B_F.R.001
+    400022: Wheel_4B_R.L.001
+    400024: Wheel_4B_R.R.001
+    400026: Cistern_1A_Addon
+    400028: Cistern_1A_Addon_Wheel_F.L
+    400030: Cistern_1A_Addon_Wheel_F.R
+    400032: Cistern_1A_Addon_Wheel_R.L
+    400034: Cistern_1A_Addon_Wheel_R.R
+    400036: Cistern_1A_Body
+    400038: Cistern_1A_Wheel_F.L
+    400040: Cistern_1A_Wheel_F.R
+    400042: Cistern_1A_Wheel_R.L
+    400044: Cistern_1A_Wheel_R.R
+    2300000: Car_4B.001
+    2300002: Car_4B_Addon.001
+    2300004: Car_4E.002
+    2300006: Car_4E.004
+    2300008: Wheel_4B_Addon_F.L.001
+    2300010: Wheel_4B_Addon_F.R.001
+    2300012: Wheel_4B_Addon_R.L.001
+    2300014: Wheel_4B_Addon_R.R.001
+    2300016: Wheel_4B_F.L.001
+    2300018: Wheel_4B_F.R.001
+    2300020: Wheel_4B_R.L.001
+    2300022: Wheel_4B_R.R.001
+    2300024: Cistern_1A_Addon
+    2300026: Cistern_1A_Addon_Wheel_F.L
+    2300028: Cistern_1A_Addon_Wheel_F.R
+    2300030: Cistern_1A_Addon_Wheel_R.L
+    2300032: Cistern_1A_Addon_Wheel_R.R
+    2300034: Cistern_1A_Body
+    2300036: Cistern_1A_Wheel_F.L
+    2300038: Cistern_1A_Wheel_F.R
+    2300040: Cistern_1A_Wheel_R.L
+    2300042: Cistern_1A_Wheel_R.R
+    3300000: Car_4B.001
+    3300002: Car_4B_Addon.001
+    3300004: Car_4E.002
+    3300006: Car_4E.004
+    3300008: Wheel_4B_Addon_F.L.001
+    3300010: Wheel_4B_Addon_F.R.001
+    3300012: Wheel_4B_Addon_R.L.001
+    3300014: Wheel_4B_Addon_R.R.001
+    3300016: Wheel_4B_F.L.001
+    3300018: Wheel_4B_F.R.001
+    3300020: Wheel_4B_R.L.001
+    3300022: Wheel_4B_R.R.001
+    3300024: Cistern_1A_Addon
+    3300026: Cistern_1A_Addon_Wheel_F.L
+    3300028: Cistern_1A_Addon_Wheel_F.R
+    3300030: Cistern_1A_Addon_Wheel_R.L
+    3300032: Cistern_1A_Addon_Wheel_R.R
+    3300034: Cistern_1A_Body
+    3300036: Cistern_1A_Wheel_F.L
+    3300038: Cistern_1A_Wheel_F.R
+    3300040: Cistern_1A_Wheel_R.L
+    3300042: Cistern_1A_Wheel_R.R
+    4300000: Car_4E.004
+    4300002: Car_4E.002
+    4300004: Car_4B.001
+    4300006: Wheel_4B_R.L.001
+    4300008: Wheel_4B_F.L.001
+    4300010: Wheel_4B_F.R.001
+    4300012: Wheel_4B_R.R.001
+    4300014: Car_4B_Addon.001
+    4300016: Wheel_4B_Addon_F.R.001
+    4300018: Wheel_4B_Addon_F.L.001
+    4300020: Wheel_4B_Addon_R.L.001
+    4300022: Wheel_4B_Addon_R.R.001
+    4300024: Cistern_1A_Body
+    4300026: Cistern_1A_Wheel_F.R
+    4300028: Cistern_1A_Wheel_R.R
+    4300030: Cistern_1A_Wheel_R.L
+    4300032: Cistern_1A_Wheel_F.L
+    4300034: Cistern_1A_Addon
+    4300036: Cistern_1A_Addon_Wheel_F.R
+    4300038: Cistern_1A_Addon_Wheel_R.R
+    4300040: Cistern_1A_Addon_Wheel_R.L
+    4300042: Cistern_1A_Addon_Wheel_F.L
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

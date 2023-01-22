@@ -1,0 +1,11 @@
+Added URP compatibility from 2019.4 and later.
+
+
+When importing the pack in a URP project, open the "URP_Install_Toon Industries" file from the project hierarchy.
+This will replace the custom toon shaders with URP compatible custom toon shaders.
+
+For post-processing to work properly, select the Pipeline Asset and set the Grading Mode to "Low Dynamic Range" and the LUT size to "16".
+
+
+Renderer settings:
+Please check the "Depth Texture" and "Opaque Texture" boxes just in case there are some custom shaders coming in the next updates.

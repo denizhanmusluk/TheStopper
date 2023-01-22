@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: d96c6c3128644ad44b97d86410f50418
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Car_14F.002
+    100002: Car_14F_Seat.L.002
+    100004: Car_14F_Seat.L.003
+    100006: Car_14F_Seat.L.004
+    100008: Car_14F_Steering_Wheel.002
+    100010: //RootNode
+    100012: Car_23A
+    100014: Car_3A.001
+    100016: Wheel_8A_F.L.002
+    100018: Wheel_8A_F.R.002
+    100020: Wheel_8A_R.L.002
+    100022: Wheel_8A_R.R.002
+    100024: Car_23A_Bench
+    100026: Car_23A_Seat.L
+    100028: Car_23A_Seat.R
+    100030: Car_23A_Steering_Wheel
+    100032: Wheel_23A_F.L
+    100034: Wheel_23A_F.R
+    100036: Wheel_23A_R.L
+    100038: Wheel_23A_R.R
+    400000: Car_14F.002
+    400002: Car_14F_Seat.L.002
+    400004: Car_14F_Seat.L.003
+    400006: Car_14F_Seat.L.004
+    400008: Car_14F_Steering_Wheel.002
+    400010: //RootNode
+    400012: Car_23A
+    400014: Car_3A.001
+    400016: Wheel_8A_F.L.002
+    400018: Wheel_8A_F.R.002
+    400020: Wheel_8A_R.L.002
+    400022: Wheel_8A_R.R.002
+    400024: Car_23A_Bench
+    400026: Car_23A_Seat.L
+    400028: Car_23A_Seat.R
+    400030: Car_23A_Steering_Wheel
+    400032: Wheel_23A_F.L
+    400034: Wheel_23A_F.R
+    400036: Wheel_23A_R.L
+    400038: Wheel_23A_R.R
+    2100000: Car_23A_D
+    2100002: Car_8A_D
+    2300000: Car_14F.002
+    2300002: Car_14F_Seat.L.002
+    2300004: Car_14F_Seat.L.003
+    2300006: Car_14F_Seat.L.004
+    2300008: Car_14F_Steering_Wheel.002
+    2300010: Car_23A
+    2300012: Car_3A.001
+    2300014: Wheel_8A_F.L.002
+    2300016: Wheel_8A_F.R.002
+    2300018: Wheel_8A_R.L.002
+    2300020: Wheel_8A_R.R.002
+    2300022: //RootNode
+    2300024: Car_23A_Bench
+    2300026: Car_23A_Seat.L
+    2300028: Car_23A_Seat.R
+    2300030: Car_23A_Steering_Wheel
+    2300032: Wheel_23A_F.L
+    2300034: Wheel_23A_F.R
+    2300036: Wheel_23A_R.L
+    2300038: Wheel_23A_R.R
+    3300000: Car_14F.002
+    3300002: Car_14F_Seat.L.002
+    3300004: Car_14F_Seat.L.003
+    3300006: Car_14F_Seat.L.004
+    3300008: Car_14F_Steering_Wheel.002
+    3300010: Car_23A
+    3300012: Car_3A.001
+    3300014: Wheel_8A_F.L.002
+    3300016: Wheel_8A_F.R.002
+    3300018: Wheel_8A_R.L.002
+    3300020: Wheel_8A_R.R.002
+    3300022: //RootNode
+    3300024: Car_23A_Bench
+    3300026: Car_23A_Seat.L
+    3300028: Car_23A_Seat.R
+    3300030: Car_23A_Steering_Wheel
+    3300032: Wheel_23A_F.L
+    3300034: Wheel_23A_F.R
+    3300036: Wheel_23A_R.L
+    3300038: Wheel_23A_R.R
+    4300000: Car_3A.001
+    4300002: Car_14F_Seat.L.004
+    4300004: Car_14F.002
+    4300006: Car_14F_Seat.L.003
+    4300008: Car_14F_Steering_Wheel.002
+    4300010: Car_14F_Seat.L.002
+    4300012: Car_23A
+    4300014: Wheel_8A_F.L.002
+    4300016: Wheel_8A_F.R.002
+    4300018: Wheel_8A_R.L.002
+    4300020: Wheel_8A_R.R.002
+    4300022: Car_23A_Seat.R
+    4300024: Car_23A_Bench
+    4300026: Car_23A_Steering_Wheel
+    4300028: Car_23A_Seat.L
+    4300030: Wheel_23A_F.L
+    4300032: Wheel_23A_F.R
+    4300034: Wheel_23A_R.L
+    4300036: Wheel_23A_R.R
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Car_23A_D
+    second: {fileID: 2100000, guid: 52af9de3287a3d347877ca340132a37f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Car_8A_D
+    second: {fileID: 2100000, guid: 7772a46c67a144ba9addd0f15bf065c5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

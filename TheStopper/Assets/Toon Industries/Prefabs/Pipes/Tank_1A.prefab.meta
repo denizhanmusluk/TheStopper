@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a6b37408a75b84a47ac50335fdf935c6
+labels:
+- flammable
+- fuel
+- tank
+timeCreated: 1522432535
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

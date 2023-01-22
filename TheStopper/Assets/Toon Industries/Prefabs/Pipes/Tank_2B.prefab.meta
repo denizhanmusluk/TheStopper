@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6d19bcfe4e4b84446ae41f30a8f28c79
+labels:
+- flammable
+- hazard
+- radioactive
+- tank
+timeCreated: 1522432548
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

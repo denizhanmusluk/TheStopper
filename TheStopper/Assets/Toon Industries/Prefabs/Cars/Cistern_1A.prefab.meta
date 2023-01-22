@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 93c8f03a043ce4ec38e08f0ffb9e601b
+labels:
+- car
+- cistern
+- truck
+- vehicle
+timeCreated: 1522273411
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
